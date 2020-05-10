@@ -17,6 +17,10 @@
  });
 
  self.addEventListener('fetch', function(event) {
+    if (event.request.method !== 'GET') {
+        console.log('WORKER: fetch event ignored.', event.request.method, event.request.url);
+        return;
+    }
     console.log('Event: Fetch');
     event.respondWith(
         caches.match(event.request)
